@@ -1,0 +1,316 @@
+﻿//@Author Michael Zou Wu
+public class Address
+{
+/**The street # & street name*/
+private String street;
+  
+/**The city in which the address is located*/
+private String city;
+  
+/**The state in which the address is located*/
+private String state;
+  
+/**The zip code associated with that city and street*/
+private String zip;
+/**Constructor creates an address using four parameters
+@param road describes the street number and name
+@param town describes the city
+@param st describes the state
+@param zipCode describes the zip code*/
+public Address(String road, String town, String st, String zipCode)
+{
+street = road;
+city = town;
+state = st;
+zip = zipCode;
+}
+/**toString method returns information about the address
+@return all imformation about the address*/
+public String toString()
+{
+return (street + ", " + city + ", " + state + " " + zip);
+}
+}
+//Person class
+public class Person
+{
+/**The person's last name*/
+private String lastName;
+  
+/**The person's first name*/
+private String firstName;
+  
+/**The person's address*/
+private Address home;
+/**Constructor creates a person from a last name,
+first name, and address
+@param last the person's last name
+@param first the person's first name
+@param residence the person's address*/
+public Person(String last, String first, Address residence)
+{
+lastName = last;
+firstName = first;
+home = residence;
+}
+/**toString method returns information about the person
+@return information about the person*/
+public String toString()
+{
+return(firstName + " " + lastName + ", " + home.toString());
+}
+}
+//Money Class
+public class Money {
+   /** A number of dollars */
+   private long dollars;
+   /** A number of cents */
+   private long cents;
+   /**
+   * Constructor creates a Money object using the amount of money in dollars
+   * and cents represented with a decimal number
+   *
+   * @param amount
+   * the amount of money in the conventional decimal format
+   */
+   public Money(double amount) {
+           if (amount < 0) {
+                   System.out
+                                   .println("Error: Negative amounts of money are not allowed.");
+                   System.exit(0);
+           } else {
+                   long allCents = Math.round(amount * 100);
+                   dollars = allCents / 100;
+                   cents = allCents-dollars*100;
+           }
+   }
+  
+   public Money(Money money)
+   {
+           this.dollars=money.dollars;
+           this.cents=money.cents;
+   }
+  
+   /**
+   * checks whether the calling Money object and the parameter Money object are equal.
+   *
+   * @param money
+   * the amount of money to compare
+   * @return true if the calling Money object and the parameter Money object are equal
+   *                            else false
+   */
+   public boolean equals(Money money)
+   {
+           return (this.dollars==money.dollars && this.cents==money.cents);
+   }
+  
+   /**
+   * Returns the amount of money as a String
+   *
+   * @return the String with dollars and cents
+   */
+   public String toString()
+   {
+           String cents=this.cents+"";
+           if(this.cents<10)cents="0"+cents;
+           return "$"+this.dollars+"."+cents;
+   }
+   /**
+   * Adds the calling Money object to the parameter Money object.
+   *
+   * @param otherAmount
+   * the amount of money to add
+   * @return the sum of the calling Money object and the parameter Money
+   * object
+   */
+   public Money add(Money otherAmount) {
+           Money sum = new Money(0);
+           sum.cents = this.cents + otherAmount.cents;
+           long carryDollars = sum.cents / 100;
+           sum.cents = sum.cents;
+           sum.dollars = this.dollars + otherAmount.dollars + carryDollars;
+           return sum;
+   }
+   /**
+   * Subtracts the parameter Money object from the calling Money object and
+   * returns the difference.
+   *
+   * @param amount
+   * the amount of money to subtract
+   * @return the difference between the calling Money object and the parameter
+   * Money object
+   */
+   public Money subtract(Money amount) {
+           Money difference = new Money(0);
+           if (this.cents < amount.cents) {
+                   this.dollars = this.dollars - 1;
+                   this.cents = this.cents + 100;
+           }
+           difference.dollars = this.dollars - amount.dollars;
+           difference.cents = this.cents - amount.cents;
+           return difference;
+   }
+   /**
+   * Compares instance variable of the calling object with the parameter
+   * object. It returns -1 if the dollars and the cents of the calling object
+   * are less than the dollars and the cents of the parameter object, 0 if the
+   * dollars and the cents of the calling object are equal to the dollars and
+   * cents of the parameter object, and 1 if the dollars and the cents of the
+   * calling object are more than the dollars and the cents of the parameter
+   * object.
+   *
+   * @param amount
+   * the amount of money to compare against
+   * @return -1 if the dollars and the cents of the calling object are less
+   * than the dollars and the cents of the parameter object, 0 if the
+   * dollars and the cents of the calling object are equal to the
+   * dollars and cents of the parameter object, and 1 if the dollars
+   * and the cents of the calling object are more than the dollars and
+   * the cents of the parameter object.
+   */
+   public int compareTo(Money amount) {
+           int value;
+           if (this.dollars < amount.dollars) {
+                   value = -1;
+           } else if (this.dollars > amount.dollars) {
+                   value = 1;
+           } else if (this.cents < amount.cents) {
+                   value = -1;
+           } else if (this.cents > amount.cents) {
+                   value = 1;
+           } else {
+                   value = 0;
+           }
+           return value;
+   }
+}
+//MoneyDriver class
+public class MoneyDriver
+{
+//This is a driver for testing the class
+public static void main(String[] args)
+{
+final int BEGINNING = 500;
+final Money FIRST_AMOUNT = new Money(10.02);
+final Money SECOND_AMOUNT = new Money(10.02);
+final Money THIRD_AMOUNT = new Money(10.88);
+Money balance = new Money(BEGINNING);
+System.out.println("The current amount is " +
+balance.toString());
+balance = balance.add(SECOND_AMOUNT);
+System.out.println("Adding " + SECOND_AMOUNT +
+" gives " + balance.toString());
+balance = balance.subtract(THIRD_AMOUNT);
+System.out.println("Subtracting " + THIRD_AMOUNT +
+" gives " + balance.toString());
+boolean equal = SECOND_AMOUNT.equals(FIRST_AMOUNT);
+if(equal)
+System.out.println(SECOND_AMOUNT + " equals "
++ FIRST_AMOUNT);
+else
+System.out.println(SECOND_AMOUNT +
+" does not equal " + FIRST_AMOUNT);
+equal = THIRD_AMOUNT.equals(FIRST_AMOUNT);
+if(equal)
+System.out.println(THIRD_AMOUNT + " equals " +
+FIRST_AMOUNT);
+else
+System.out.println(THIRD_AMOUNT + " does not equal "
++ FIRST_AMOUNT);
+}
+}
+//CreditCard class
+
+
+public class CreditCard
+{
+   private Person owner;
+   private Money balance;
+   private Money creditLimit;
+  
+   public CreditCard(Person owner,Money creditLimit)
+   {
+           this.owner=owner;
+           this.balance=new Money(0);
+           this.creditLimit=new Money(creditLimit);
+   }
+   public String getCreditLimit()
+   {
+           Money limit=new Money(this.creditLimit);
+           return limit.toString();
+   }
+   public String getPersonals()
+   {
+           return this.owner.toString();
+   }
+   public void charge(Money money)
+   {
+           int state=(money.add(this.balance)).compareTo(this.creditLimit);
+           if(state==-1)
+           {
+                   this.balance=this.balance.add(money);
+           }else System.out.println("Exceeds credit limit!");
+   }
+   public void payment(Money money)
+   {
+           this.balance=this.balance.subtract(money);
+   }
+   public String getBalance()
+   {
+           Money ret=new Money(this.balance);
+           return ret.toString();
+   }
+}
+//CreditCardDemo class
+public class CreditCardDemo {
+   public static void main(String[] args) {
+           final Money LIMIT = new Money(1000);
+           final Money FIRST_AMOUNT = new Money(200);
+           final Money SECOND_AMOUNT = new Money(10.02);
+           final Money THIRD_AMOUNT = new Money(25);
+           final Money FOURTH_AMOUNT = new Money(990);
+           Person owner = new Person("Christie", "Diane", new Address(
+                           "237J Harvey Hall", "Menomonie", "WI", "54751"));
+           CreditCard visa = new CreditCard(owner, LIMIT);
+           System.out.println(visa.getPersonals());
+           System.out.println("Balance: " + visa.getBalance());
+           System.out.println("Credit Limit: " + visa.getCreditLimit());
+           System.out.println();
+           System.out.println("Attempt to charge " + FIRST_AMOUNT);
+           visa.charge(FIRST_AMOUNT);
+           System.out.println("Balance: " + visa.getBalance());
+           System.out.println("Attempt to charge " + SECOND_AMOUNT);
+           visa.charge(SECOND_AMOUNT);
+           System.out.println("Balance: " + visa.getBalance());
+           System.out.println("Attempt to pay " + THIRD_AMOUNT);
+           visa.payment(THIRD_AMOUNT);
+           System.out.println("Balance: " + visa.getBalance());
+           System.out.println("Attempt to charge " + FOURTH_AMOUNT);
+           visa.charge(FOURTH_AMOUNT);
+           System.out.println("Balance: " + visa.getBalance());
+   }
+}
+
+
+
+
+
+
+ ----jGRASP exec: java CreditCardDemo
+Diane Christie, 237J Harvey Hall, Menomonie, WI 54751
+Balance: $0.00
+Credit Limit: $1000.00
+
+
+Attempt to charge $200.00
+Balance: $200.00
+Attempt to charge $10.02
+Balance: $210.02
+Attempt to pay $25.00
+Balance: $185.02
+Attempt to charge $990.00
+Exceeds credit limit!
+Balance: $185.02
+
+
+ ----jGRASP: operation complete.
