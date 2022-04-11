@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <div class="Knicks Vs Nets">
+    <p>
+      <label>Knicks</label>
+      <input id="inputknicks" type="number" placeholder="points" oninput="temperatureConverter(this.value)" onchange="temperatureConverter(this.value)">
+    </p>
+    <p>result: <span id="outputknicks"></span></p>
+    <label>Nets</label>
+    <input id="inputnets" type="number" placeholder="points" oninput="temperatureConverter(this.value)" onchange="temperatureConverter(this.value)">
+  </p>
+  <p>result: <span id="outputnets"></span></p>
+<hr class="solid">
+<!--part B tip------><style>
+  body {
+    text-align: center;
+  }
+</style>
+
+<body>
+    <input id="bill" placeholder ="How much was you meal?" />
+
+    <button onclick ="tip()">Calculate</button>
+    <h1 id="tip">Tip: $0</h1>
+    <h1 id="total">Total: $0</h1>
+    <script> let bill = document.querySelector("#bill")
+
+        function tip(){
+			let bill = document.getElementById('bill').value;
+            let billNum = parseInt(bill);
+            let yourTip = billNum * .15;
+            let total = yourTip + billNum;
+
+            document.getElementById('tip').innerHTML = "Tip: $" + yourTip;
+            document.getElementById('total').innerHTML = "Total: $" + total;
+        }
+    </script>
+   </body>
+<hr class="solid">
+   <!--part c---->
+   <section>
+ <h1>Fahrenheit to Celcius Temperature Converter </h1>
+ <p>Type a value in the Fahrenheit field to convert the value to Celsius:</p>
+ <div class="Celsius">
+ <p>
+   <label>Fahrenheit</label>
+   <input id="inputFahrenheit" type="number" placeholder="Fahrenheit" oninput="temperatureConverter(this.value)" onchange="temperatureConverter(this.value)">
+ </p>
+ <p>Celcius: <span id="outputCelcius"></span></p>
+
+ <script>
+ function temperatureConverter(valNum) {
+   valNum = parseFloat(valNum);
+   document.getElementById("outputCelcius").innerHTML=(valNum-32)/1.8;
+ }
+ </script>
+ </div>
+ <div class-"Fahrenheit"
+ <h2>Celcius To Fahrenheit Temperature Converter
+ <p>Type a value in the Celsius field to convert the value to Fahrenheit:</p>
+ <p>
+   <label>Celsius</label>
+   <input id="inputCelius" type="integer" placeholder="Celsius" oninput="revertConverter(this.value)" onchange="revertConverter(this.value)">
+ </p>
+ <p>Fahrenheit: <span id="outputFahrenheit"></span></p>
+
+ <script>
+ function revertConverter(revertNum) {
+   revertNum = parseFloat(revertNum);
+   document.getElementById("outputFahrenheit").innerHTML=(revertNum*1.8)+32;
+ }
+ </script>
+ </div>
+ </section>
+  <script src="jan22.js">
+  </script>
+  </body>
+</html>
